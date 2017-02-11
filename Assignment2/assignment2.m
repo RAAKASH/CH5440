@@ -27,25 +27,8 @@ theta2 = ((A2(1:1200,:))'*(A2(1:1200,:)))\(A2(1:1200,:)' *b2(1:1200));
 RMSE1 = rms(A1(3431:end,:)*theta1 -b1(3431:end)); % Scale of 10
 RMSE2 = rms(A2(1201:end,:)*theta2 -b2(1201:end)); % Scale of 10
 
-%% TLS - Ist attempt
-% n=11;
-% Sz_1 = (dat_1(1:3430,:)'*dat_1(1:3430,:));
-% [V_1,D_1] =eig(Sz_1);
-% reg_1 = V_1./V_1(end,:);
-% reg_1 = -reg_1(1:11,12); 
-% beta_1 =  mean(dat_1(1:3430,12));
-% RMSE_TLS_1 = (sum((dat_1(3431:end,1:11)*reg_1-dat_1(3431:end,12)+beta_1).^2/m1))^0.5;
-% D_1= diag(D_1);
-% 
-% Sz_2 = (dat_2(1:1200,:)'*dat_2(1:1200,:));
-% [V_2,D_2] =eig(Sz_2);
-% reg_2 = V_2./V_2(end,:);
-% reg_2 = -reg_2(1:11,12); 
-% beta_2 =  mean(dat_2(1:1200,12));
-% RMSE_TLS_2 = (sum((dat_2(1201:end,1:11)*reg_2-dat_2(1201:end,12)+beta_2).^2/m1))^0.5;
-% D_2= diag(D_2);
-%% TLS - 2nd attempt
 
+%% TLS 
 std1 = std(data_1(:,12));
 mean1 = mean(data_1(:,12));
 [U_1,S_1,V_1] =svd(D_1(1:3430,:));
