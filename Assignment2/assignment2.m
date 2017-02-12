@@ -70,10 +70,10 @@ data_1 = xlsread('temperature_global.xlsx','temperature_global','C8:G38');
 [m1,n1] = size(data_1);
 dat_1 = (data_1 - mean(data_1))./(zeros(size(data_1))+std(data_1));
 % Correlation 
-sum(dat_1(:,1).*dat_1(:,end))
-sum(dat_1(:,2).*dat_1(:,end))
-sum(dat_1(:,3).*dat_1(:,end))
-sum(dat_1(:,4).*dat_1(:,end))
+sum(dat_1(:,1).*dat_1(:,end))/m1
+sum(dat_1(:,2).*dat_1(:,end))/m1
+sum(dat_1(:,3).*dat_1(:,end))/m1
+sum(dat_1(:,4).*dat_1(:,end))/m1
 %%  Scaling of data in the y column
 [reg_1,RMSE_1,e1] = TLS(data_1,0.7);
 [reg_1_OLS,RMSE_1_OLS] = OLS(data_1,0.7);
