@@ -37,7 +37,7 @@ reg_1 = V_1(:,end);
 reg_1 = (-reg_1/reg_1(end));
 reg_1 = reg_1(1:(end-1));
 d_1 = D_1 + (-D_1*V_1(:,end))*(V_1(:,end)') ; % Transforming Data to new basis
-X_1 = d_1(:,1:(end-1));
+X_1 = D_1(:,1:(end-1));
 
 RMSE_TLS_1 = rms((X_1(3431:end,:)*reg_1-D_1(3431:end,12))*std1); % Scale of 10
 %RMSE_TLS_1 = rms(X_1(3431:end,:)*reg_1-D_1(3431:end,12)); 
@@ -52,7 +52,7 @@ S_2 = diag(S_2); %
 reg_2 = V_2(:,end);
 reg_2 = (-reg_2/reg_2(end));
 d_2 = D_2+(-D_2*V_2(:,end))*(V_2(:,end)') ;
-X_2 = d_2(:,1:(end-1));
+X_2 = D_2(:,1:(end-1));
 reg_2 = reg_2(1:(end-1));
 RMSE_TLS_2 = rms((X_2(1201:end,:)*reg_2-D_2(1201:end,12))*std2); % Scale of 10
 %RMSE_TLS_2 = rms(X_2(1201:end,:)*reg_2-D_2(1201:end,12));
