@@ -246,7 +246,7 @@ clear std
 %% Measured data
 fprintf('Flow data 1 \n');
 data = Fmeas;
-[U,S,~] = svd(data');
+[U,S,~] = svd((data)');
 s = diag(S);
 n = length(s);
 c = U(:,(n-2):n)'; % 2 independent variables F1,F2
@@ -261,7 +261,7 @@ print('Singular value plot 2-a ,1','-dpng');
 pause
 %% Real data
 data = Ftrue;
-[U,S,V] = svd(data');
+[U,S,V] = svd((data)'); % Try mean centering the data , The results seem better when it isnt cenetered
 s = diag(S);
 n = length(s);
 c = U(:,(n-2):n)'; % 2 independent variables F1,F2
