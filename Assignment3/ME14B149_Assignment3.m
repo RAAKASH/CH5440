@@ -18,7 +18,7 @@ rms(rms(test-d))
 % pause;
 %% LOOCV 1-a
 X = d(1:(end-3),:);
-[~,S,~] = svd(X);
+[~,S,~] = svd(X,econ);
 
 s = diag(S);
 n= length(s);
@@ -272,11 +272,16 @@ plot(1:length(s),s);
 clc
 %% Auto scale of measured data
 fprintf('Auto scaled measurements of flow 1 \n');
-data = (Fmeas-mean(Fmeas))./std(Fmeas); 
-[U,S,~] = svd(data');
+data =Fmeas./std(Fmeas);
+v = std(Fmeas);
+S= diag(v(end:-1:1));
+
+L = S^0.5;
 s = diag(S);
 n = length(s);
-c = U(:,(n-2):n)'; % 2 independent variables F1,F2
+[U,~,~] = svd(data');
+U = U./(diag(L));
+c = (U(:,(n-2):n))'; % 2 independent variables F1,F2
 constraints_PCA_meas_auto1 = -(c(:,3:end)'*c(:,3:end))\(c(:,3:end)'*c(:,1:2))
 c = Atrue;
 constraints_real = -(c(:,3:end)'*c(:,3:end))\(c(:,3:end)'*c(:,1:2))
