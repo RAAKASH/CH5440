@@ -1,0 +1,59 @@
+   This data was obtained through a carefully designed experiment involving
+three-component mixtures of metal ions (Co(II), Cr(III), Ni(II)), a system 
+suggested from the work of Osten and Kowalski [1].  Stock solutions of the 
+nitrates were prepared with concentrations of 0.172, 0.0764, and 0.393 M 
+for Co, Ni and Cr respectively, in 4% nitric acid.  All chemicals used 
+were analytical reagent grade or better.  A three-level, three-factor 
+calibration design was used in which 1, 3, or 5 mL aliquots of the various 
+stock solutions were combined and diluted to 25 mL with 4% nitric acid.  
+Unfortunately, insufficient Ni stock remained for one solution 
+(3:5:5 Co:Cr:Ni), so the calibration set consisted of 26 rather than 27 
+solutions.  Final concentration ranges were 6.88 to 34.40 mM for Co, 3.06 to 
+15.29 mM for Cr, and 15.70 to 78.8 mM for Ni.  Five replicate spectra were 
+obtained for each sample using randomized blocks (i.e. 5 blocks of all 26 
+solutions, randomly ordered within each block). To minimize the effects of 
+instrumental drift, a reference spectrum was run prior to each new sample.  
+Spectra were recorded over the range of 300-650 nm on a HP 8452 diode array 
+spectrophotometer (Hewlett-Packard, Palo Alto, CA range : 190-820 nm) using a standard 1 cm 
+quartz cuvette.  Measurements were made at 2nm intervals with a 1 s 
+integration time.
+
+Variables contained in this data file.
+
+- DATA        a 130x176 data matrix of the absorbance spectra
+              for each sample. Each row corresponds an 
+              individual spectrum.
+
+- stdDATA     a 130x176 data matrix of the standard deviations associated
+              with each absorbance measurement.
+
+- CONC        a 130x3 data matrix containing the concentrations (in M) of 
+              Cr, Ni, and Co in each solution. Each row corresponds to an
+              individual sample.  The columns correspond to Cr, Ni and Co
+              respectively.
+
+- WAV         a 1x176 row vector containing the wavelengths 
+              corresponding to each column of DATA
+
+- PureCo      a 1x176 row vector of the pure component 
+              spectrum for Co. The concentration of Co is 
+              given in PureCoCONC.
+
+- PureCoCONC  a scalar of the concentration of Co in PureCo.
+
+- PureCr      a 1x176 row vector of the pure component 
+              spectrum for Cr. The concentration of Cr is 
+              given in PureCrCONC.
+
+- PureCrCONC  a scalar of the concentration of Co in PureCr.
+
+- PureNi      a 1x176 row vector of the pure component 
+              spectrum for Ni.  The concentration of Ni is 
+              given in PureNiCONC.
+
+- PureNiCONC  a scalar of the concentration of Ni in PureNi.
+
+[1]  D.W. Osten and B.R. Kowalski, Analytical Chemistry, 1985, 57, 908-915.
+
+
+Note:  Samples #12 and #28 are suspect and were omitted in Wentzell's MVC paper
