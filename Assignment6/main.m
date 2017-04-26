@@ -1,6 +1,7 @@
 clc ;
 clear ;
 load('vpdata.mat');
+pause
 %% 
 m = mean(temp);
 s = std(temp) ; 
@@ -72,5 +73,90 @@ xlabel('Temperature')
 ylabel('P_{sat}');
 title('Modeling comparison');
 legend('Modelled','True');
-%% 
- 
+%% Question 2
+clc
+clear all
+load('arx.mat')
+%% Constructing data Matrix
+y = ymeas;
+u = umeas;
+D = [y(:,2:end);y(:,1:end-1);u(:,1:end-1)];
+%% OLS Estimation
+D = D';
+b = D(:,1);
+A = D(:,2:3);
+reg1 = (A'*A)\(A'*b);
+%% TLS Estimation
+[U,S,V] = svd(D','econ');
+reg2 = -U(end,1:end-1)/U(end,end);
+%% Part D - Constructing stacked data
+Dat  = [];
+Dat1 = [];
+[m,n] = size(y);
+k  = 10; % Stack Size
+for i=1:(n-k)
+Dat  = [Dat,flipud(y(i:i+k)')];
+Dat1 = [Dat1 ,flipud(u(i:i+k-1)')];
+end
+
+%% Assuming order = 1
+% here k = m (from class notes)
+ord  = 1; 
+ind = k-ord+1; % No fo constarint equations
+FinD = [Dat;Dat1];
+[U,S,V] = svd(FinD,'econ'); 
+Constraint = U(:,(end-ind+1):end)';
+A = Constraint(:,1:k+1);
+B = -Constraint(:,k+2:end);
+[m,n] =size(A);
+% Structure of A
+A_class = zeros(m,n);
+for i=1:n-1
+A_class(i,i:i+1) = [1,1];
+end
+%Obtaing rotation matrix for A
+for i=1:n-1
+T = A(:,[1:(i-1),(i+2):n]);
+b = -T(i,:)';
+a = T([1:(i-1),(i+1):(m)],:)';
+reg =  ((a'*a)\(a'*b))';
+R = [reg(1:(i-1)),1,reg(i:m-1)];
+M(i,:) = R;
+end
+A_new = M*A;
+B_new = M*B;
+a0 = mean(diag(A_new));
+S=0;
+for i =1:m
+   S = S + ((A_new(i,i+1)));
+end
+a1 = S/(m-1);
+b1 = mean(diag(B_new));
+a1=-a1/a0;
+b1 = -b1/a0;
+a0 = -a0/a0;
+% Compiling results
+res = [[-1,reg1'];[-1,reg2];[a0,a1,b1]];
+%% M*L = New Matrix
+% L =Constraint;
+% b = -L(1,[3:k,k+2:21])';
+% A = L(2:end,[3:k,k+2:21])';
+% reg = [1;(A'*A)\(A'*b)]';
+% check = reg*L;
+
+% for i =1:ind
+% L =Constraint;
+% b = -L(i,[1:(i-1),(i+2):(i+k-1),i+k+1:21])';
+% A = L([(1:i-1),(i+1):10],[1:(i-1),(i+2):(i+k-1),i+k+1:21])';
+% reg = ((A'*A)\(A'*b))';
+% reg = [reg(1:(i-1)),1,reg((i):end)];
+% M(i,:) = reg;
+% end
+% L_new = M*L;
+% % L_new(abs(L_new)<0.5) =0;
+% S = 0 ;% Sum
+% for i=1:ind
+% S = S + -L_new(i,[i:i+1,i+k+1])/L_new(i,i);
+% end
+% S = S/ind;
+
