@@ -137,26 +137,4 @@ b1 = -b1/a0;
 a0 = -a0/a0;
 % Compiling results
 res = [[-1,reg1'];[-1,reg2];[a0,a1,b1]];
-%% M*L = New Matrix
-% L =Constraint;
-% b = -L(1,[3:k,k+2:21])';
-% A = L(2:end,[3:k,k+2:21])';
-% reg = [1;(A'*A)\(A'*b)]';
-% check = reg*L;
-
-% for i =1:ind
-% L =Constraint;
-% b = -L(i,[1:(i-1),(i+2):(i+k-1),i+k+1:21])';
-% A = L([(1:i-1),(i+1):10],[1:(i-1),(i+2):(i+k-1),i+k+1:21])';
-% reg = ((A'*A)\(A'*b))';
-% reg = [reg(1:(i-1)),1,reg((i):end)];
-% M(i,:) = reg;
-% end
-% L_new = M*L;
-% % L_new(abs(L_new)<0.5) =0;
-% S = 0 ;% Sum
-% for i=1:ind
-% S = S + -L_new(i,[i:i+1,i+k+1])/L_new(i,i);
-% end
-% S = S/ind;
 
